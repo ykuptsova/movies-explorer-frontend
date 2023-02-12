@@ -1,6 +1,7 @@
 import { Routes, Route } from 'react-router-dom';
 import Main from '../Main/Main';
 import Movies from '../Movies/Movies';
+import NotFound from '../NotFound/NotFound';
 import './App.css';
 
 function App() {
@@ -14,6 +15,7 @@ function App() {
         {/* <Route path="/profile" element={<Profile />} /> */}
         {/* <Route path="/signin" element={<Login />} /> */}
         {/* <Route path="/signup" element={<Register />} /> */}
+        <Route path="*" element={<NotFound />} />
       </Routes>
     </div>
   );
