@@ -77,8 +77,8 @@
 }
 
 .about-project__stage-bold {
-  background-color: #000;
-  color: #FFF;
+  background-color: #2BE080;
+  color: #000;
 }
 
 @media (max-width: 768px) {

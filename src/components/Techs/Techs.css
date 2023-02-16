@@ -50,7 +50,7 @@
   max-width: 460px;
 }
 
-.techs__list {
+.techs__links-list {
   display: grid;
   justify-content: center;
   gap: 10px 10px;
@@ -60,11 +60,11 @@
   padding: 0;
 }
 
-.techs__list-item {
+.techs__links-item {
   margin: 0 10px 0 0;
 }
 
-.techs__list-item:last-child {
+.techs__links-item:last-child {
   margin-right: 0;
 }
 
@@ -110,7 +110,7 @@
     line-height: 1.5;
   }
 
-  .techs__list {
+  .techs__links-list {
     grid-template-columns: repeat(auto-fit, 84px);
   }
 
@@ -149,13 +149,13 @@
     line-height: 1.45;
   }
 
-  .techs__list {
+  .techs__links-list {
     padding: 0 20px;
     align-self: center;
     text-align: center;
   }
 
-  .techs__list-item {
+  .techs__links-item {
     margin: 0;
   }
 
