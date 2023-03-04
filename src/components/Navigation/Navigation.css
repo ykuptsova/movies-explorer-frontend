@@ -1,7 +1,6 @@
 .navigation {
   display: flex;
   align-items: center;
-  position: relative;
 }
 
 .navigation__links-list {

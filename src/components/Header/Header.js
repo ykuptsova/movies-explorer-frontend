@@ -2,11 +2,15 @@ import { useContext, useState, useEffect } from 'react';
 import CurrentUserContext from '../../contexts/CurrentUserContext.jsx';
 import './Header.css';
 import logo from "../../images/logo.svg"
+import hamburger from "../../images/hamburger.svg"
 import Navigation from '../Navigation/Navigation'
+import AccountButton from '../AccountButton/AccountButton'
+import NavOverlay from '../NavOverlay/NavOverlay'
 
 function Header (props) {
   const currentUser = useContext(CurrentUserContext);
   const [loggedIn, setLoggedIn] = useState(false)
+  const [hamburgerOpen, setHamburgerOpen] = useState(false)
 
   useEffect(() => {
     setLoggedIn(!!currentUser.id)
@@ -21,9 +25,13 @@ function Header (props) {
           </div>
           <Navigation/>
         </div>
-        <a href="/profile" className="header__account-link">
-          Аккаунт
-        </a>
+        <div className="header__account-button">
+          <AccountButton/>
+        </div>
+        <button className="header__hamburger" onClick={ () => setHamburgerOpen(true) }>
+          <img alt='project menu' src={hamburger}/>
+        </button>
+        { hamburgerOpen && <NavOverlay onClose={ () => setHamburgerOpen(false) }/> }
       </>
     )
   }
