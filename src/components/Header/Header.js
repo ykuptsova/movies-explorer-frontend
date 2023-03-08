@@ -1,5 +1,5 @@
-import { useContext, useState, useEffect } from 'react';
-import CurrentUserContext from '../../contexts/CurrentUserContext.jsx';
+import { useContext, useState } from 'react';
+import UserContext from '../../contexts/UserContext.js';
 import './Header.css';
 import logo from "../../images/logo.svg"
 import hamburger from "../../images/hamburger.svg"
@@ -8,13 +8,8 @@ import AccountButton from '../AccountButton/AccountButton'
 import NavOverlay from '../NavOverlay/NavOverlay'
 
 function Header (props) {
-  const currentUser = useContext(CurrentUserContext);
-  const [loggedIn, setLoggedIn] = useState(false)
+  const user = useContext(UserContext);
   const [hamburgerOpen, setHamburgerOpen] = useState(false)
-
-  useEffect(() => {
-    setLoggedIn(!!currentUser.id)
-  }, [currentUser]);
 
   const renderLoggedIn = () => {
     return (
@@ -54,10 +49,10 @@ function Header (props) {
     )
   }
 
-  const className = loggedIn ? 'header header_loggedIn' : 'header header_loggedOut'
+  const className = user.id ? 'header header_loggedIn' : 'header header_loggedOut'
   return (
     <div className={ className }>
-      { loggedIn ? renderLoggedIn() : renderLoggedOut() }
+      { user.id ? renderLoggedIn() : renderLoggedOut() }
     </div>
   )  
 }
