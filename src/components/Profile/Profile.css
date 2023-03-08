@@ -113,6 +113,15 @@
   opacity: 0.6;
 }
 
+.profile__button-save_disabled {
+  background-color: #F8F8F8;
+  color: #C2C2C2;
+}
+
+.profile__button-save_disabled:hover {
+  opacity: 1.0;
+}
+
 .profile__button-exit {
   border: none;
   font-weight: 500;

@@ -41,8 +41,12 @@ function Profile (props) {
           <div className="profile__buttons-container">
             { editing && error && <div className="profile__error-message">При обновлении профиля произошла ошибка.</div> }
             { !editing
-              ? <button className="profile__button-edit" onClick={ () => setEditing(true) }>Редактировать</button>
-              : <button className="profile__button-save" onClick={ () => setEditing(false) }>Сохранить</button> }
+              ? <button
+                  className="profile__button-edit"
+                  onClick={ () => setEditing(true) }>Редактировать</button>
+              : <button
+                  className={ "profile__button-save" + (error ? ' profile__button-save_disabled' : '') }
+                  onClick={ () => setEditing(false) }>Сохранить</button> }
             { !editing &&
               <button type="submit" className="profile__button-exit">Выйти из аккаунта</button> }
           </div>
