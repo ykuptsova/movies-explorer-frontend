@@ -13,7 +13,7 @@ function Profile (props) {
       <Header handleSignIn={ props.handleSignIn } handleSignOut={ props.handleSignOut }/>
       <section className="profile__content">
         <form className="profile__form" name="profile">
-        <h1 className="profile__title">{`Привет, ${user.name || ''} ♥️!`}</h1>
+        <h1 className="profile__title">{`Привет, ${user.name || ''}!`}</h1>
         <div className="profile__labels-container">
           <label className="profile__label">
             <span className="profile__label-text">Имя</span>
