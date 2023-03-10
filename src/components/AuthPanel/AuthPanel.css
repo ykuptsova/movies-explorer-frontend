@@ -1,0 +1,27 @@
+.auth-panel__button {
+  margin-top: auto;
+  border-style: none;
+  background-color: #2BE080;
+  border-radius: 3px;
+  font-family: 'Inter', 'Arial', 'Helvetica', sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 1.21;
+  color: #fff;
+  box-sizing: border-box;
+  transition: all .2s;
+  cursor: pointer;
+  width: 100%;
+  padding: 14px 0;
+}
+
+.auth-panel__button:hover {
+  opacity: 0.6;
+}
+
+@media (max-width: 320px) {
+  .auth-panel__button {
+    font-size: 12px;
+    line-height: 1.25;
+  }
+}
