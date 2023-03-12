@@ -1,0 +1,23 @@
+.movie-cards-list {
+    background-color: #FFF;
+    display: grid;
+    grid-gap: 30px 24px;
+    grid-template-columns: repeat(3, 1fr);
+    padding: 70px 70px 30px;
+}
+
+@media (max-width: 768px) {
+  .movie-cards-list {
+    grid-gap: 36px 30px;
+    grid-template-columns: repeat(2, 1fr);
+    padding: 70px 30px 30px;
+  }
+}
+
+@media (max-width: 320px) {
+  .movie-cards-list {
+    grid-gap: 16px;
+    grid-template-columns: repeat(1, 1fr);
+    padding: 40px 10px 30px;
+  }
+}
