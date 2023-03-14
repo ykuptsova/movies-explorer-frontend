@@ -19,7 +19,7 @@ function MoviesCardList(props) {
     return { ...d, durationMinutes }
   })
 
-  const searchFilter = props.searchFilter.trim()
+  const searchFilter = (props.searchFilter || '').trim()
   if (searchFilter) {
     data = data.filter(d => d.title.includes(searchFilter))
   }
