@@ -1,10 +1,10 @@
-.movie-card {
+.movies-card {
   background-color: #FDFDFD;
   box-shadow: 0 4px 30px rgba(0, 0, 0, 0.08);
   overflow: hidden;
 }
 
-.movie-details {
+.movies-card__details {
   align-items: center;
   display: grid;
   grid-template-columns: 1fr auto;
@@ -13,7 +13,8 @@
   "title button"
   "duration duration";
 } 
-.movie-card__title {
+
+.movies-card__title {
   grid-area: title;
   color: #000;
   font-family: 'Inter', 'Arial', 'Helvetica', sans-serif;
@@ -24,7 +25,7 @@
   padding: 14px 14px 9px;
 }
 
-.movie-card__duration {
+.movies-card__duration {
   grid-area: duration;
   color: #A0A0A0;
   font-family: 'Inter', 'Arial', 'Helvetica', sans-serif;
@@ -35,17 +36,17 @@
   padding: 9px 14px 14px;
 }
 
-.movie-card__poster {
+.movies-card__poster {
   width: 100%;
   height: auto;
   object-fit: cover;
 }
 
-.movie-card__poster-container {
+.movies-card__poster-container {
   display: flex;
 }
 
-.movie-card__save-button {
+.movies-card__save-button {
   grid-area: button;
   border: none;
   background: none;
@@ -55,17 +56,17 @@
   margin: 19px 14px 0;
 }
 
-.movie-card__save-button:hover {
+.movies-card__save-button:hover {
   transition: 1s ease-in-out;
 }
 
-.movie-card__save-button > .movie-card__save-image_hover {
+.movies-card__save-button > .movies-card__save-image_hover {
   display: none;
 }
 
-.movie-card__save-button:hover > .movie-card__save-image_hover {
+.movies-card__save-button:hover > .movies-card__save-image_hover {
   display: block;
 }
-.movie-card__save-button:hover > .movie-card__save-image {
+.movies-card__save-button:hover > .movies-card__save-image {
   display: none;
 }
