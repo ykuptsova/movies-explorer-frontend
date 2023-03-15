@@ -86,9 +86,12 @@
   .search-form__input-group {
     border-right: none;
   }
+  .search-form__divider {
+    padding-top: 45px
+  }
 }
 
-@media (max-width: 320px) {
+@media (max-width: 450px) {
   .search-form {
     padding: 80px 10px 10px;
   }
@@ -105,9 +108,5 @@
   .search-form__input {
     font-size: 14px;
     line-height: 1.43;
-  }
-
-  .search-form__divider {
-    padding-top: 45px
   }
 }
