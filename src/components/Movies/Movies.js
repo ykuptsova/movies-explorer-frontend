@@ -13,12 +13,16 @@ function Movies (props) {
   return (
     <div className="movies">
       <div className="movies__container">
-        <Header handleSignIn={ props.handleSignIn } handleSignOut={ props.handleSignOut }/>
+        <Header
+          handleSignIn={ props.handleSignIn }
+          handleSignOut={ props.handleSignOut }/>
         <SearchForm
           setSearchFilter={ setSearchFilter }
           shortFilms={ shortFilms }
           setShortFilms={ setShortFilms } />
-        <MoviesCardList searchFilter={ searchFilter } shortFilms={ shortFilms }/>
+        <MoviesCardList
+          searchFilter={ searchFilter }
+          shortFilms={ shortFilms }/>
       </div>
       <Footer/>     
     </div>

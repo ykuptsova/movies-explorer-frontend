@@ -43,7 +43,7 @@
 }
 
 .portfolio__link:hover {
-  opacity: .6;
+  opacity: 0.6;
 }
 
 @media (max-width: 768px) {
