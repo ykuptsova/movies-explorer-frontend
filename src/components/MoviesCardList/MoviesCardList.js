@@ -31,7 +31,12 @@ function MoviesCardList(props) {
   
   return (
     <section className="movies-cards-list">
-      { data.map((card, i) => <MoviesCard key={ i } card={ card }/>) }
+      <div className="movies-cards-list__cards">
+        { data.map((card, i) => <MoviesCard key={ i } card={ card }/>) }
+      </div>
+      <div className="movies-cards-list__show-more">
+        <button className="movies-cards-list__show-more-button" type="button">Ещё</button>
+      </div>
     </section>
   )
 }
