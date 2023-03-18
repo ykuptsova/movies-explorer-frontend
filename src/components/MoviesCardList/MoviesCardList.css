@@ -11,6 +11,10 @@
   padding: 70px 70px 30px;
 }
 
+.movies-cards-list__cards_no-more {
+  padding-bottom: 170px;
+}
+
 .movies-cards-list__show-more {
   width: 100%;
   display: flex;

@@ -67,6 +67,17 @@
 .movies-card__save-button:hover > .movies-card__save-image_hover {
   display: block;
 }
+
 .movies-card__save-button:hover > .movies-card__save-image {
   display: none;
+}
+
+.movies-card__delete-button {
+  grid-area: button;
+  border: none;
+  background: none;
+  cursor: pointer;
+  width: 30px;
+  height: 30px;
+  margin: 19px 14px 0;
 }

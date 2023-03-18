@@ -5,7 +5,8 @@ import LoggedInRoute from '../LoggedInRoute/LoggedInRoute'
 import LoggedOutRoute from '../LoggedOutRoute/LoggedOutRoute'
 import Main from '../Main/Main';
 import Movies from '../Movies/Movies';
-import Profile from '../Profile/Profile'
+import SavedMovies from '../SavedMovies/SavedMovies';
+import Profile from '../Profile/Profile';
 import Login from '../Login/Login';
 import Register from '../Register/Register';
 import NotFound from '../NotFound/NotFound';
@@ -13,6 +14,8 @@ import './App.css';
 
 function App() {
   const [user, setUser] = useState({ id: 1, name: 'Ярославна' });
+  // uncomment to logout 
+  // const [user, setUser] = useState({  });
   const handleSignIn = () => setUser({ id: 'test' })
   const handleSignOut = () => setUser({})
 
@@ -24,10 +27,10 @@ function App() {
             <Main handleSignIn={ handleSignIn } handleSignOut={ handleSignOut }/>}
           />
           <Route exact path="/movies" element={
-            <LoggedInRoute element={ <Movies type='all'/> }/>
+            <LoggedInRoute element={ <Movies/> }/>
           }/>
           <Route exact path="/saved-movies" element={
-            <LoggedInRoute element={ <Movies type='saved'/> }/>
+            <LoggedInRoute element={ <SavedMovies/> }/>
           }/>
           <Route exact path="/profile" element={
             <LoggedInRoute element={
