@@ -18,7 +18,7 @@ function Header (props) {
           <div className="header__project-logo" onClick={ props.handleSignOut }>
             <img alt='project logo' src={logo}/>
           </div>
-          <Navigation/>
+          <Navigation onlySavedMovies={ props.onlySavedMovies }/>
         </div>
         <div className="header__account-button">
           <AccountButton/>
