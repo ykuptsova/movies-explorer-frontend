@@ -39,11 +39,6 @@
   opacity: 0.6;
 }
 
-.login__logo {
-  width: 38px;
-  height: 38px;
-}
-
 .login__title {
   font-family: 'Inter', 'Arial', 'Helvetica', sans-serif;
   font-weight: 500;
@@ -89,7 +84,12 @@
   color: #000;
 }
 
-.login__buttons-container {
+.login__input:focus {
+  border-radius: 9px;
+  outline: 2px solid #2BE080;
+}
+
+.login__links-container {
   display: flex;
   flex-direction: column;
   gap: 16px;
@@ -105,8 +105,8 @@
   align-self: center;
 }
 
-.login__reg-button {
-  border: none;
+.login__reg-link {
+  text-decoration: none;
   font-family: 'Inter', 'Arial', 'Helvetica', sans-serif;
   font-weight: 400;
   font-size: 14px;
@@ -117,7 +117,7 @@
   cursor: pointer;
 }
 
-.login__reg-button:hover {
+.login__reg-link:hover {
   opacity: 0.6;
 }
 
@@ -146,7 +146,7 @@
     line-height: 1.25;
   }
   
-  .login__reg-button {
+  .login__reg-link {
     font-size: 12px;
     line-height: 1.25;
   }

@@ -15,16 +15,15 @@ import './App.css';
 function App() {
   const [user, setUser] = useState({ id: 1, name: 'Ярославна' });
   // uncomment to logout 
-  // const [user, setUser] = useState({  });
-  const handleSignIn = () => setUser({ id: 'test' })
+  //const [user, setUser] = useState({ });
   const handleSignOut = () => setUser({})
 
   return (
-    <div className="App">
+    <div className="app">
       <UserContext.Provider value={ user }>
         <Routes>
           <Route exact path="/" element={
-            <Main handleSignIn={ handleSignIn } handleSignOut={ handleSignOut }/>}
+            <Main/>}
           />
           <Route exact path="/movies" element={
             <LoggedInRoute element={ <Movies/> }/>
@@ -34,7 +33,7 @@ function App() {
           }/>
           <Route exact path="/profile" element={
             <LoggedInRoute element={
-              <Profile handleSignIn={ handleSignIn } handleSignOut={ handleSignOut }/>
+              <Profile handleSignOut={ handleSignOut }/>
             }/>
           }/>
           <Route exact path="/signin" element={

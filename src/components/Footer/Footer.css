@@ -67,7 +67,7 @@
   }
 }
 
-@media (max-width: 320px) {
+@media (max-width: 360px) {
   .footer {
     font-size: 12px;
     grid-template-areas:

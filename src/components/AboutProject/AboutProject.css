@@ -63,6 +63,7 @@
   text-align: center;
   margin: 0;
   padding: 9px 0;
+  white-space: nowrap;
 }
 
 .about-project__stage-title {
@@ -74,6 +75,7 @@
   line-height: 1.2;
   text-align: center;
   margin: 0;
+  white-space: nowrap;
 }
 
 .about-project__stage-bold {

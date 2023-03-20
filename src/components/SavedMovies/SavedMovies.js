@@ -2,7 +2,7 @@ import Movies from '../Movies/Movies';
 
 function SavedMovies(props) {
   return (
-     <Movies onlySavedMovies={ true }/>
+     <Movies/>
   )
 }
 

@@ -11,7 +11,7 @@ function SearchForm (props) {
   return (
     <section className="search-form">
       <div className="search-form__container">
-        <label className="search-form__input-group">
+        <form className="search-form__input-group" onSubmit={ e => e.preventDefault() }>
           <img className="search-form__lens-image" alt='lens icon' src={ lens }/>
           <input
             className="search-form__input"
@@ -25,7 +25,7 @@ function SearchForm (props) {
           <button className="search-form__button" onClick={ () => props.setSearchFilter(searchFilter) }>
             <img className="search-form__button-image" alt='search movie' src={ search }/>
           </button>
-        </label>
+        </form>
         <FilterCheckbox
           className="search-form__filter-checkbox-wide"
           shortFilms={ props.shortFilms }

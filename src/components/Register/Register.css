@@ -39,11 +39,6 @@
   opacity: 0.6;
 }
 
-.register__logo {
-  width: 38px;
-  height: 38px;
-}
-
 .register__title {
   font-family: 'Inter', 'Arial', 'Helvetica', sans-serif;
   font-weight: 500;
@@ -89,7 +84,12 @@
   color: #000;
 }
 
-.register__buttons-container {
+.register__input:focus {
+  border-radius: 9px;
+  outline: 2px solid #2BE080;
+}
+
+.register__links-container {
   display: flex;
   flex-direction: column;
   gap: 16px;
@@ -106,8 +106,8 @@
   align-self: center;
 }
 
-.register__login-button {
-  border: none;
+.register__login-link {
+  text-decoration: none;
   font-weight: 500;
   font-size: 13px;
   line-height: 1.23;
@@ -117,7 +117,7 @@
   cursor: pointer;
 }
 
-.register__login-button:hover {
+.register__login-link:hover {
   opacity: 0.6;
 }
 
@@ -146,7 +146,7 @@
     line-height: 1.25;
   }
   
-  .register__login-button {
+  .register__login-link {
     font-size: 12px;
     line-height: 1.25;
   }

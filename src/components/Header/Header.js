@@ -1,11 +1,12 @@
 import { useContext, useState } from 'react';
+import { NavLink } from 'react-router-dom';
 import UserContext from '../../contexts/UserContext.js';
 import './Header.css';
-import logo from "../../images/logo.svg"
-import hamburger from "../../images/hamburger.svg"
-import Navigation from '../Navigation/Navigation'
-import AccountButton from '../AccountButton/AccountButton'
-import NavOverlay from '../NavOverlay/NavOverlay'
+import hamburger from '../../images/hamburger.svg';
+import Logo from '../Logo/Logo';
+import Navigation from '../Navigation/Navigation';
+import AccountButton from '../AccountButton/AccountButton';
+import NavOverlay from '../NavOverlay/NavOverlay';
 
 function Header (props) {
   const user = useContext(UserContext);
@@ -15,10 +16,10 @@ function Header (props) {
     return (
       <>
         <div className="header__left-part">
-          <div className="header__project-logo" onClick={ props.handleSignOut }>
-            <img alt='project logo' src={logo}/>
+          <div className="header__project-logo">
+            <Logo/>
           </div>
-          <Navigation onlySavedMovies={ props.onlySavedMovies }/>
+          <Navigation/>
         </div>
         <div className="header__account-button">
           <AccountButton/>
@@ -35,15 +36,15 @@ function Header (props) {
     return (
       <>
         <div className="header__project-logo">
-          <img alt='project logo' src={logo}/>
+          <Logo/>
         </div>
-        <div className="header__buttons">
-          <button className='header__button header__button_register'>Регистрация</button>
-          <button
-            className='header__button header__button_enter'
-            onClick={ props.handleSignIn }>
+        <div className="header__links">
+          <NavLink to='/signup' className='header__link header__link_register'>
+            Регистрация
+          </NavLink>
+          <NavLink to='/signin' className='header__link header__link_enter'>
             Войти
-          </button>
+          </NavLink>
         </div>
       </>
     )
@@ -51,9 +52,9 @@ function Header (props) {
 
   const className = user.id ? 'header header_loggedIn' : 'header header_loggedOut'
   return (
-    <div className={ className }>
+    <header className={ className }>
       { user.id ? renderLoggedIn() : renderLoggedOut() }
-    </div>
+    </header>
   )  
 }
 

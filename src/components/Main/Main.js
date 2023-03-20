@@ -1,6 +1,7 @@
 import React from 'react';
 import './Main.css';
 import Header from '../Header/Header'
+import PageContent from '../PageContent/PageContent';
 import AboutProject from '../AboutProject/AboutProject'
 import Techs from '../Techs/Techs'
 import AboutMe from '../AboutMe/AboutMe'
@@ -11,12 +12,14 @@ import Footer from '../Footer/Footer'
 function Main (props) {
   return (
     <div className="main">
-      <Header handleSignIn={ props.handleSignIn } handleSignOut={ props.handleSignOut }/>
-      <Promo/>
-      <AboutProject/>
-      <Techs/>
-      <AboutMe/>
-      <Portfolio/>
+      <Header/>
+      <PageContent>
+        <Promo/>
+        <AboutProject/>
+        <Techs/>
+        <AboutMe/>
+        <Portfolio/>
+      </PageContent>
       <Footer/>
     </div>
   )

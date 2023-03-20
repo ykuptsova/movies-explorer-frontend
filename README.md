@@ -12,7 +12,7 @@ https://drive.google.com/file/d/1Fb1c8Rno12cv3HpCDaMHdYohVmyDrQ-6/view?usp=shari
 - CCS3
 - Флексбокс / Грид
 - Анимации и трансформации с использованием CSS
-- Организация фалов по БЭМ (Nested BEM)
+- Организация фалов по БЭМ
 - Медиа-запросы CSS
 - Java Script
 - React.js

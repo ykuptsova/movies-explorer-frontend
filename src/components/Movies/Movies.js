@@ -2,6 +2,7 @@ import React from 'react';
 import { useState } from 'react';
 import './Movies.css';
 import Header from '../Header/Header';
+import PageContent from '../PageContent/PageContent';
 import SearchForm from '../SearchForm/SearchForm';
 import MoviesCardList from '../MoviesCardList/MoviesCardList'
 import Footer from '../Footer/Footer'
@@ -32,19 +33,17 @@ function Movies (props) {
   return (
     <div className="movies">
       <div className="movies__container">
-        <Header
-          handleSignIn={ props.handleSignIn }
-          handleSignOut={ props.handleSignOut }
-          onlySavedMovies={ props.onlySavedMovies }/>
-        <SearchForm
-          setSearchFilter={ setSearchFilter }
-          shortFilms={ shortFilms }
-          setShortFilms={ setShortFilms } />
-        <MoviesCardList
-          movies={ movies }
-          searchFilter={ searchFilter }
-          shortFilms={ shortFilms }
-          onlySavedMovies={ props.onlySavedMovies }/>
+        <Header/>
+        <PageContent>
+          <SearchForm
+            setSearchFilter={ setSearchFilter }
+            shortFilms={ shortFilms }
+            setShortFilms={ setShortFilms } />
+          <MoviesCardList
+            movies={ movies }
+            searchFilter={ searchFilter }
+            shortFilms={ shortFilms }/>
+        </PageContent>
       </div>
       <Footer/>     
     </div>

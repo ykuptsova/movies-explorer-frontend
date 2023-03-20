@@ -1,13 +1,18 @@
+import { useState } from 'react';
+import { useLocation } from 'react-router-dom';
 import "./MoviesCardList.css";
 import MoviesCard from '../MoviesCard/MoviesCard';
 
 function MoviesCardList(props) {
+  const [moviesLimit, setMoviesLimit] = useState(9);
+  const location = useLocation()
+  const onlySavedMovies = location.pathname === '/saved-movies'
+
   const durationRegex = /(?:(?<hours>\d+)ч\s*)?(?:(?<minutes>\d+)м)?/
 
   const movies = props.movies
-    .filter(d => props.onlySavedMovies ? d.saved : true)
+    .filter(d => onlySavedMovies ? d.saved : true)
   let data = movies
-    .slice(0, 9)
     .map(d => {
       const matches = d.duration.match(durationRegex)
       const hours = parseInt(matches.groups.hours || 0)
@@ -25,8 +30,14 @@ function MoviesCardList(props) {
   if (shortFilms) {
     data = data.filter(d => d.durationMinutes <= 45)
   }
-  
-  const showMore = data.length < movies.length
+
+  const onMoreClicked = () => {
+    setMoviesLimit(moviesLimit + 9)
+  }
+
+  const showMore = moviesLimit < data.length
+  data = data.slice(0, moviesLimit)
+
   return (
     <section className="movies-cards-list">
       <div className={ 'movies-cards-list__cards' + (!showMore ? ' movies-cards-list__cards_no-more' : '') }>
@@ -34,7 +45,10 @@ function MoviesCardList(props) {
       </div>
       { showMore &&
         <div className="movies-cards-list__show-more">
-          <button className="movies-cards-list__show-more-button" type="button">Ещё</button>
+          <button
+            className="movies-cards-list__show-more-button"
+            type="button"
+            onClick={ onMoreClicked }>Ещё</button>
         </div> }
     </section>
   )
