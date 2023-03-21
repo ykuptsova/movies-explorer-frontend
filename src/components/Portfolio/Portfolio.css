@@ -60,7 +60,7 @@
   }
 }
 
-@media (max-width: 320px) {
+@media (max-width: 360px) {
   .portfolio {
     text-align: left;
     padding: 70px 14px;

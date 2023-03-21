@@ -32,19 +32,17 @@ function Movies (props) {
 
   return (
     <div className="movies">
-      <div className="movies__container">
-        <Header/>
-        <PageContent>
-          <SearchForm
-            setSearchFilter={ setSearchFilter }
-            shortFilms={ shortFilms }
-            setShortFilms={ setShortFilms } />
-          <MoviesCardList
-            movies={ movies }
-            searchFilter={ searchFilter }
-            shortFilms={ shortFilms }/>
-        </PageContent>
-      </div>
+      <Header/>
+      <PageContent>
+        <SearchForm
+          setSearchFilter={ setSearchFilter }
+          shortFilms={ shortFilms }
+          setShortFilms={ setShortFilms } />
+        <MoviesCardList
+          movies={ movies }
+          searchFilter={ searchFilter }
+          shortFilms={ shortFilms }/>
+      </PageContent>
       <Footer/>     
     </div>
   )
