@@ -1,0 +1,165 @@
+@import "../../vendor/fonts/fonts.css";
+
+.techs {
+  background-color: #F5F5F5;
+  padding: 100px 70px;
+}
+
+.techs__title {
+  color: #000;
+  font-family: 'Inter', 'Arial', 'Helvetica', sans-serif;
+  font-weight: 400;
+  font-size: 22px;
+  line-height: 1.23;
+  letter-spacing: -0.04em;
+  border-bottom: 1px solid #000;
+  text-align: left;
+  width: 100%;
+  margin: 0 0 90px;
+  padding: 0 0 23px;
+}
+
+.techs__about {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  margin: 0 0 100px;
+}
+
+.techs__about-title {
+  color: #000;
+  font-family: 'Inter', 'Arial', 'Helvetica', sans-serif;
+  font-size: 50px;
+  font-weight: 400;
+  letter-spacing: -0.04em;
+  line-height: 1.16;
+  text-align: center;
+  margin: 0 0 26px;
+  max-width: 600px;
+}
+
+.techs__about-description {
+  color: #000;
+  font-family: 'Inter', 'Arial', 'Helvetica', sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  letter-spacing: -0.04em;
+  line-height: 1.43;
+  text-align: center;
+  margin: 0;
+  max-width: 460px;
+}
+
+.techs__links-list {
+  display: grid;
+  justify-content: center;
+  gap: 10px 10px;
+  grid-template-columns: repeat(auto-fit, 90px);
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.techs__links-item {
+  margin: 0 10px 0 0;
+}
+
+.techs__links-item:last-child {
+  margin-right: 0;
+}
+
+.techs__link {
+  background-color: #E8E8E8;
+  border-radius: 10px;
+  color: #000;
+  display: block;
+  font-family: 'Inter', 'Arial', 'Helvetica', sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  letter-spacing: -0.04em;
+  line-height: 1;
+  text-align: center;
+  text-decoration: none;
+  transition: all .2s;
+  padding: 21px 0;
+}
+
+.techs__link:hover {
+  opacity: 0.6;
+}
+
+@media (max-width: 768px) {
+  .techs {
+    padding: 90px 50px;
+  }
+
+  .techs__title {
+    margin: 0 0 80px;
+  }
+
+  .techs__about {
+    margin: 0 0 83px;
+  }
+
+  .techs__about-title {
+    margin: 0 0 22px;
+  }
+
+  .techs__about-description {
+    font-size: 12px;
+    line-height: 1.5;
+  }
+
+  .techs__links-list {
+    grid-template-columns: repeat(auto-fit, 84px);
+  }
+
+  .techs__link {
+    font-size: 12px;
+    min-width: 84px;
+  }
+}
+
+@media (max-width: 360px) {
+  .techs {
+    padding: 70px 18px;
+    background-color: #fff;
+  }
+
+  .techs__title {
+    margin: 0 0 60px;
+    font-size: 18px;
+    padding: 0 0 28px;
+  }
+
+  .techs__about {
+    margin: 0 0 50px;
+    align-self: center;
+    text-align: center;
+  }
+
+  .techs__about-title {
+    font-size: 30px;
+    line-height: 1.2;
+    margin: 0 0 24px;
+  }
+
+  .techs__about-description {
+    font-size: 11px;
+    line-height: 1.45;
+  }
+
+  .techs__links-list {
+    padding: 0 20px;
+    align-self: center;
+    text-align: center;
+  }
+
+  .techs__links-item {
+    margin: 0;
+  }
+
+  .techs__link {
+    font-size: 12px;
+  }
+}
