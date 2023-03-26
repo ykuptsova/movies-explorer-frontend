@@ -116,11 +116,11 @@ class MainApi {
   }
 }
 
-const api = new MainApi({
+const mainApi = new MainApi({
   baseUrl: 'https://api.nomoredomains.club',
   headers: {
     'Content-Type': 'application/json',
   },
 })
 
-export default api
+export default mainApi
