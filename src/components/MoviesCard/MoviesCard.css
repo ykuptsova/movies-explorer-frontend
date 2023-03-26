@@ -33,13 +33,14 @@
   font-weight: 400;
   line-height: 1.18;
   margin: 0;
-  padding: 9px 14px 14px;
+  padding: 0px 14px 14px;
 }
 
 .movies-card__poster {
   width: 100%;
-  height: auto;
+  height: 200px;
   object-fit: cover;
+  object-position: center center;
 }
 
 .movies-card__poster-container {
@@ -54,6 +55,7 @@
   width: 30px;
   height: 30px;
   margin: 19px 14px 0;
+  padding: 0;
   transition: 1s ease-in-out;
 }
 

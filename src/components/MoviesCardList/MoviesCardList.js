@@ -3,27 +3,31 @@ import { useLocation } from 'react-router-dom';
 import "./MoviesCardList.css";
 import MoviesCard from '../MoviesCard/MoviesCard';
 
+
 function MoviesCardList(props) {
   const [moviesLimit, setMoviesLimit] = useState(9);
   const location = useLocation()
   const onlySavedMovies = location.pathname === '/saved-movies'
 
-  const durationRegex = /(?:(?<hours>\d+)ч\s*)?(?:(?<minutes>\d+)м)?/
-
   const movies = props.movies
-    .filter(d => onlySavedMovies ? d.saved : true)
+    .filter(m => onlySavedMovies ? m.saved : true)
   let data = movies
-    .map(d => {
-      const matches = d.duration.match(durationRegex)
-      const hours = parseInt(matches.groups.hours || 0)
-      const minutes = parseInt(matches.groups.minutes || 0)
-      const durationMinutes = hours * 60 + minutes
-      return { ...d, durationMinutes }
+    .map(m => {
+      const duration = m.duration
+      return {
+        title: m.nameRU,
+        durationMinutes: duration,
+        duration: duration > 60
+          ? `${Math.floor(duration / 60)}ч ${Math.floor(duration % 60)}м`
+          : `${Math.floor(duration % 60)}м`,
+        src: m.thumbnail,        
+        saved: m.saved,
+      }
     })
 
-  const searchFilter = (props.searchFilter || '').trim()
+  const searchFilter = (props.searchFilter || '').toLowerCase().trim()
   if (searchFilter) {
-    data = data.filter(d => d.title.includes(searchFilter))
+    data = data.filter(d => d.title.toLowerCase().includes(searchFilter))
   }
 
   const shortFilms = props.shortFilms
@@ -41,7 +45,10 @@ function MoviesCardList(props) {
   return (
     <section className="movies-cards-list">
       <div className={ 'movies-cards-list__cards' + (!showMore ? ' movies-cards-list__cards_no-more' : '') }>
-        { data.map((card, i) => <MoviesCard key={ i } card={ card } onlySavedMovies={ props.onlySavedMovies }/>) }
+        { data.length === 0
+          ? <div>Ничего не найдено</div>
+          : data.map((card, i) =>
+              <MoviesCard key={ i } card={ card } onlySavedMovies={ props.onlySavedMovies }/>) }
       </div>
       { showMore &&
         <div className="movies-cards-list__show-more">
