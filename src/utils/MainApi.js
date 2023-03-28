@@ -22,11 +22,7 @@ class MainApi {
   signup(name, email, password) {
     const config = {
       method: 'POST',
-      body: JSON.stringify({
-        name,
-        email,
-        password,
-      }),
+      body: JSON.stringify({ name, email, password }),
     }
     return fetch(this._url('signup'), this._init(config))
       .then(this._handleResponse)
@@ -41,10 +37,7 @@ class MainApi {
   signin(email, password) {
     const config = {
       method: 'POST',
-      body: JSON.stringify({
-        email,
-        password,
-      }),
+      body: JSON.stringify({ email, password }),
     }
     return fetch(this._url('signin'), this._init(config))
       .then(this._handleResponse)
@@ -53,7 +46,8 @@ class MainApi {
         return res.token
       })
       .catch(e => {
-        e.message = errors.GENERAL(e.message)
+        e.message = e.message === '401'
+          ? errors.LOGIN_WRONG_CREDENTIALS : errors.LOGIN_GENERAL
         throw e
       })
   }
@@ -165,6 +159,10 @@ class MainApi {
 
   _handleResponse(res) {
     if (res.ok) return res.json()
+    if (res.status === '404')
+      return Promise.reject(new Error(errors.RESOURCE_NOT_FOUND))
+    if (res.status === '500')
+      return Promise.reject(new Error(errors.SERVER_FAILURE))
     return Promise.reject(new Error(res.status))
   }
 }

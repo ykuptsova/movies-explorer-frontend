@@ -23,12 +23,12 @@ export default function useValidation() {
         : '')
     }    
 
-    if (input.validationMessage === 'Please fill in this field.') {
-      input.setCustomValidity('Пожалуйста, заполните это поле.');
-    }
+    const error = input.validationMessage === 'Please fill in this field.'
+      ? 'Пожалуйста, заполните это поле.'
+      : input.validationMessage
 
     setValues({ ...values, [name]: value });
-    setErrors({ ...errors, [name]: input.validationMessage });
+    setErrors({ ...errors, [name]: error });
     setIsValid(input.closest('form').checkValidity());
   };
 

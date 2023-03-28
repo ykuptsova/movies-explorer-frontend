@@ -18,11 +18,20 @@ function App(props) {
   let navigate = useNavigate();
 
   const [user, setUser] = useState(mainApi.getStoredUser());
-  const handleSignOut = () => setUser({})
+
+  // auth handling only manages user and redirects,
+  //   jwt, user details and localStorage are handled by mainApi
   const handleSignUp = (user) => {    
-    setUser(user)    
-    navigate('/movies')
-  }
+    setUser(user);
+    navigate('/movies');
+  };
+  const handleSignIn = (user) => {
+    setUser(user);
+    navigate('/movies');
+  };
+  const handleSignOut = () => {
+    setUser({});
+  };
 
   const [movies, setMovies] = useState([])
   useEffect(() => {
@@ -65,10 +74,14 @@ function App(props) {
             }/>
           }/>
           <Route exact path="/signin" element={
-            <LoggedOutRoute element={ <Login/> }/>
+            <LoggedOutRoute element={
+              <Login handleSignIn={ handleSignIn }/>
+            }/>
           }/>
           <Route exact path="/signup" element={
-            <LoggedOutRoute element={ <Register handleSignUp={ handleSignUp }/> }/>
+            <LoggedOutRoute element={
+              <Register handleSignUp={ handleSignUp }/>
+            }/>
           }/>
           <Route path="*" element={<NotFound />} />
         </Routes>
