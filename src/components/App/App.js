@@ -1,4 +1,4 @@
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route, useNavigate } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import mainApi from '../../utils/MainApi.js'
 import moviesApi from '../../utils/MoviesApi.js'
@@ -15,14 +15,18 @@ import NotFound from '../NotFound/NotFound';
 import './App.css';
 
 function App(props) {
-  const [user, setUser] = useState({ id: 1, name: 'Ярославна' });
-  // uncomment to logout 
-  //const [user, setUser] = useState({ });
+  let navigate = useNavigate();
+
+  const [user, setUser] = useState(mainApi.getStoredUser());
   const handleSignOut = () => setUser({})
+  const handleSignUp = (user) => {    
+    setUser(user)    
+    navigate('/movies')
+  }
 
   const [movies, setMovies] = useState([])
   useEffect(() => {
-    if (!user) {
+    if (!user._id) {
       setMovies([])
       return
     }
@@ -43,8 +47,8 @@ function App(props) {
       <UserContext.Provider value={ user }>
         <Routes>
           <Route exact path="/" element={
-            <Main/>}
-          />
+            <Main/>
+          }/>
           <Route exact path="/movies" element={
             <LoggedInRoute element={
               <Movies movies={ movies }/>
@@ -64,7 +68,7 @@ function App(props) {
             <LoggedOutRoute element={ <Login/> }/>
           }/>
           <Route exact path="/signup" element={
-            <LoggedOutRoute element={ <Register/> }/>
+            <LoggedOutRoute element={ <Register handleSignUp={ handleSignUp }/> }/>
           }/>
           <Route path="*" element={<NotFound />} />
         </Routes>

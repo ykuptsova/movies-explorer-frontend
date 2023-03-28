@@ -1,9 +1,24 @@
+import errors from './errors.js'
+
+
 class MainApi {
   constructor(options) {
     this._options = options
   }
 
   // --- работа с авторизацией
+  getStoredUser () {
+    try {
+      return JSON.parse(localStorage.getItem('user') || '{}')
+    } catch {
+      return {}
+    }
+  }
+
+  setStoredUser (user) {
+    localStorage.setItem('user', JSON.stringify(user || {}))
+  }
+
   signup(name, email, password) {
     const config = {
       method: 'POST',
@@ -16,6 +31,11 @@ class MainApi {
     return fetch(this._url('signup'), this._init(config))
       .then(this._handleResponse)
       .then((res) => ({ _id: res._id, name: res.name, email: res.email }))
+      .catch(e => {
+        e.message = e.message === '409'
+          ? errors.REGISTER_DUPLICATE : errors.REGISTER_GENERAL
+        throw e
+      })
   }
 
   signin(email, password) {
@@ -32,13 +52,30 @@ class MainApi {
         localStorage.setItem('jwt', res.token)
         return res.token
       })
+      .catch(e => {
+        e.message = errors.GENERAL(e.message)
+        throw e
+      })
+  }
+
+  signout () {
+    localStorage.removeItem('jwt')
+    localStorage.removeItem('user')
   }
 
   // --- работа с профилем пользователя
   getUserInfo() {
     return fetch(this._url('users/me'), this._init())
       .then(this._handleResponse)
-      .then((userInfo) => this._toUserInfo(userInfo))
+      .then((data) => {
+        const userInfo = this._toUserInfo(data)
+        this.setStoredUser(userInfo)
+        return userInfo
+      })
+      .catch(e => {
+        e.message = errors.GENERAL(e.message)
+        throw e
+      })
   }
 
   setUserInfo(data) {
@@ -52,6 +89,10 @@ class MainApi {
     return fetch(this._url('users/me'), this._init(config))
       .then(this._handleResponse)
       .then((userInfo) => this._toUserInfo(userInfo))
+      .catch(e => {
+        e.message = errors.GENERAL(e.message)
+        throw e
+      })
   }
 
   // --- работа с фильмами
@@ -60,6 +101,10 @@ class MainApi {
     return fetch(this._url('movies'), this._init())
       .then(this._handleResponse)
       .then((movies) => movies.data.map(this._toMovie))            
+      .catch(e => {
+        e.message = errors.GENERAL(e.message)
+        throw e
+      })
   }
 
   addSavedMovie(movie) {
@@ -70,6 +115,10 @@ class MainApi {
     return fetch(this._url('movies'), this._init(config))
       .then(this._handleResponse)
       .then((movie) => this._toMovie(movie.data))
+      .catch(e => {
+        e.message = errors.GENERAL(e.message)
+        throw e
+      })
   }
 
   removeSavedMovie(id) {
@@ -79,6 +128,10 @@ class MainApi {
     return fetch(this._url(`movies/${id}`), this._init(config))
       .then(this._handleResponse)
       .then((movie) => this._toMovie(movie.data))
+      .catch(e => {
+        e.message = errors.GENERAL(e.message)
+        throw e
+      })
   }
 
   // --- вспомогательные приватные методы
@@ -112,7 +165,7 @@ class MainApi {
 
   _handleResponse(res) {
     if (res.ok) return res.json()
-    return Promise.reject(`Request failed: ${res.status}`)
+    return Promise.reject(new Error(res.status))
   }
 }
 

@@ -50,10 +50,10 @@ function Header (props) {
     )
   }
 
-  const className = user.id ? 'header header_loggedIn' : 'header header_loggedOut'
+  const className = user._id ? 'header header_loggedIn' : 'header header_loggedOut'
   return (
     <header className={ className }>
-      { user.id ? renderLoggedIn() : renderLoggedOut() }
+      { user._id ? renderLoggedIn() : renderLoggedOut() }
     </header>
   )  
 }

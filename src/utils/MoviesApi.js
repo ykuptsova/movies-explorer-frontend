@@ -1,3 +1,6 @@
+import errors from './errors.js'
+
+
 class MoviesApi {
   constructor(options) {
     this._options = options
@@ -9,6 +12,10 @@ class MoviesApi {
     return fetch(this._url('beatfilm-movies'), this._init())
       .then(this._handleResponse)
       .then((movies) => movies.map(this._toMovie))            
+      .catch(e => {
+        e.message = errors.GENERAL(e.message)
+        throw e
+      })
   }
 
   // --- вспомогательные приватные методы
@@ -36,7 +43,7 @@ class MoviesApi {
 
   _handleResponse(res) {
     if (res.ok) return res.json()
-    return Promise.reject(`Request failed: ${res.status}`)
+    return Promise.reject(new Error(res.status))
   }
 }
 

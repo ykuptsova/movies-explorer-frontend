@@ -1,4 +1,5 @@
 import { useState,  useContext } from 'react';
+import mainApi from '../../utils/MainApi.js'
 import UserContext from '../../contexts/UserContext';
 import './Profile.css';
 import PageContent from '../PageContent/PageContent';
@@ -8,6 +9,11 @@ function Profile (props) {
   const [editing, setEditing] = useState(false);
   const [error] = useState(true);
   const user = useContext(UserContext); 
+
+  const handleSignOut = () => {
+    mainApi.signout()
+    props.handleSignOut()
+  }
 
   return (
     <div className="profile">
@@ -50,7 +56,7 @@ function Profile (props) {
                     className={ "profile__button-save" + (error ? ' profile__button-save_disabled' : '') }
                     onClick={ () => setEditing(false) }>Сохранить</button> }
               { !editing &&
-                <button type="submit" className="profile__button-exit" onClick={ props.handleSignOut } >Выйти из аккаунта</button> }
+                <button type="submit" className="profile__button-exit" onClick={ handleSignOut } >Выйти из аккаунта</button> }
             </div>
           </form>
         </section>
