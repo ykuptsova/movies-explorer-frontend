@@ -24,3 +24,6 @@ npm start
 - Макет, https://drive.google.com/file/d/1Fb1c8Rno12cv3HpCDaMHdYohVmyDrQ-6/view?usp=sharing
 - GitHub, https://github.com/ykuptsova/movies-explorer-frontend/tree/level-3
 - Сервер, https://web-exp.nomoredomains.club
+
+## Pull Request Link
+- https://github.com/ykuptsova/movies-explorer-frontend/pull/2
