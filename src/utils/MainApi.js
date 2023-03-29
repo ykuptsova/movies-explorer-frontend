@@ -28,8 +28,9 @@ class MainApi {
       .then(this._handleResponse)
       .then((res) => ({ _id: res._id, name: res.name, email: res.email }))
       .catch(e => {
-        e.message = e.message === '409'
-          ? errors.REGISTER_DUPLICATE : errors.REGISTER_GENERAL
+        e.message =
+          e.message === '409' ? errors.REGISTER_DUPLICATE :
+          errors.REGISTER_GENERAL
         throw e
       })
   }
@@ -46,8 +47,9 @@ class MainApi {
         return res.token
       })
       .catch(e => {
-        e.message = e.message === '401'
-          ? errors.LOGIN_WRONG_CREDENTIALS : errors.LOGIN_GENERAL
+        e.message =
+          e.message === '401' ? errors.LOGIN_WRONG_CREDENTIALS :
+          errors.LOGIN_GENERAL
         throw e
       })
   }
@@ -61,13 +63,15 @@ class MainApi {
   getUserInfo() {
     return fetch(this._url('users/me'), this._init())
       .then(this._handleResponse)
-      .then((data) => {
-        const userInfo = this._toUserInfo(data)
+      .then((res) => {
+        const userInfo = this._toUserInfo(res)
         this.setStoredUser(userInfo)
         return userInfo
       })
       .catch(e => {
-        e.message = errors.GENERAL(e.message)
+        e.message =
+          e.message === '401' ? errors.PROFILE_WRONG_TOKEN :
+          errors.PROFILE_GENERAL
         throw e
       })
   }
@@ -82,9 +86,16 @@ class MainApi {
     }
     return fetch(this._url('users/me'), this._init(config))
       .then(this._handleResponse)
-      .then((userInfo) => this._toUserInfo(userInfo))
+      .then((res) => {
+        const userInfo = this._toUserInfo(res)
+        this.setStoredUser(userInfo)
+        return userInfo
+      })
       .catch(e => {
-        e.message = errors.GENERAL(e.message)
+        e.message =
+          e.message === '409' ? errors.PROFILE_DUPLICATE :
+          e.message === '401' ? errors.PROFILE_WRONG_TOKEN :
+          errors.PROFILE_GENERAL
         throw e
       })
   }

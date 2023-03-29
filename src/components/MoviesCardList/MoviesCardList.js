@@ -9,7 +9,7 @@ function MoviesCardList(props) {
   const location = useLocation()
   const onlySavedMovies = location.pathname === '/saved-movies'
 
-  const movies = props.movies
+  const movies = (props.movies || [])
     .filter(m => onlySavedMovies ? m.saved : true)
   let data = movies
     .map(m => {
@@ -45,7 +45,7 @@ function MoviesCardList(props) {
   return (
     <section className="movies-cards-list">
       <div className={ 'movies-cards-list__cards' + (!showMore ? ' movies-cards-list__cards_no-more' : '') }>
-        { data.length === 0
+        { props.movies !== null && data.length === 0
           ? <div>Ничего не найдено</div>
           : data.map((card, i) =>
               <MoviesCard key={ i } card={ card } onlySavedMovies={ props.onlySavedMovies }/>) }

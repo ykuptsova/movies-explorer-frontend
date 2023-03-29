@@ -29,27 +29,34 @@ function App(props) {
     setUser(user);
     navigate('/movies');
   };
-  const handleSignOut = () => {
+  const handleProfileUpdate = (user) => {
+    setUser(user);
+  };
+  const handleSignOut = () => {    
     setUser({});
+    navigate('/');
   };
 
-  const [movies, setMovies] = useState([])
+  const [movies, setMovies] = useState(null)
   useEffect(() => {
-    if (!user._id) {
-      setMovies([])
-      return
-    }
-    Promise
-      .all([
-        mainApi.getSavedMovies(),
-        moviesApi.getMovies(),
-      ])
-      .then(([savedMovies, movies]) => {
-        const savedMovieIds = new Set(savedMovies.map(m => m.movieId))
-        movies.forEach(m => m.saved = savedMovieIds.has(m.movieId))
-        setMovies(movies)
-      })
+    setMovies(null)
   }, [user]);
+  // useEffect(() => {
+  //   if (!user._id) {
+  //     setMovies([])
+  //     return
+  //   }
+  //   Promise
+  //     .all([
+  //       mainApi.getSavedMovies(),
+  //       moviesApi.getMovies(),
+  //     ])
+  //     .then(([savedMovies, movies]) => {
+  //       const savedMovieIds = new Set(savedMovies.map(m => m.movieId))
+  //       movies.forEach(m => m.saved = savedMovieIds.has(m.movieId))
+  //       setMovies(movies)
+  //     })
+  // }, [user]);
 
   return (
     <div className="app">
@@ -70,7 +77,7 @@ function App(props) {
           }/>
           <Route exact path="/profile" element={
             <LoggedInRoute element={
-              <Profile handleSignOut={ handleSignOut }/>
+              <Profile handleSignOut={ handleSignOut } handleProfileUpdate={ handleProfileUpdate }/>
             }/>
           }/>
           <Route exact path="/signin" element={

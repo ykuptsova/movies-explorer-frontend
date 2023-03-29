@@ -2,8 +2,8 @@ import isEmail from 'validator/es/lib/isEmail';
 import { useState, useCallback } from 'react';
 
 
-export default function useValidation() {
-  const [values, setValues] = useState({});
+export default function useValidation(initialValues = {}) {
+  const [values, setValues] = useState(initialValues);
   const [errors, setErrors] = useState({});
   const [isValid, setIsValid] = useState(false);
 
@@ -23,9 +23,12 @@ export default function useValidation() {
         : '')
     }    
 
-    const error = input.validationMessage === 'Please fill in this field.'
-      ? 'Пожалуйста, заполните это поле.'
-      : input.validationMessage
+    const error =
+      input.validationMessage === 'Please fill in this field.'
+        ? 'Пожалуйста, заполните это поле.' :
+      input.validationMessage === 'Please lengthen this text to 2 characters or more (you are currently using 1 character).'
+        ? 'Это поле должно быть длинной 2 символа и более.' :
+      input.validationMessage
 
     setValues({ ...values, [name]: value });
     setErrors({ ...errors, [name]: error });
