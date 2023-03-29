@@ -3,10 +3,12 @@ import { useLocation } from 'react-router-dom';
 import "./MoviesCardList.css";
 import MoviesCard from '../MoviesCard/MoviesCard';
 import Preloader from '../Preloader/Preloader';
+import mainApi from '../../utils/MainApi';
 
 
 function MoviesCardList(props) {
-  const [moviesLimit, setMoviesLimit] = useState(9);
+  const iw = window.innerWidth
+  const [moviesLimit, setMoviesLimit] = useState(iw > 768 ? 12 : iw > 480 ? 8 : 5);
   const location = useLocation()
   const onlySavedMovies = location.pathname === '/saved-movies'
 
@@ -16,12 +18,14 @@ function MoviesCardList(props) {
     .map(m => {
       const duration = m.duration
       return {
+        movieId: m.movieId,
         title: m.nameRU,
         durationMinutes: duration,
         duration: duration > 60
           ? `${Math.floor(duration / 60)}ч ${Math.floor(duration % 60)}м`
           : `${duration}м`,
         src: m.thumbnail,        
+        trailerLink: m.trailerLink,
         saved: m.saved,
       }
     })
@@ -36,12 +40,31 @@ function MoviesCardList(props) {
     data = data.filter(d => d.durationMinutes <= 45)
   }
 
-  const onMoreClicked = () => {
-    setMoviesLimit(moviesLimit + 9)
+  const handleMoreClicked = () => {
+    const iw = window.innerWidth
+    const delta = iw > 768 ? 3 : 2
+    setMoviesLimit(moviesLimit + delta)
+  }
+
+  const handleMovieSave = (card) => {    
+    if (card.saved) {
+      mainApi
+        .removeSavedMovie(card.saved)      
+        .then(() => props.handleMovieSaved(card.movieId, null))
+    } else {
+      const movie = props.movies.find(m => m.movieId === card.movieId)
+      const payload = { ...movie }
+      payload.movieId = payload._id
+      delete payload._id
+      delete payload.saved  
+      mainApi
+        .addSavedMovie(payload)
+        .then(m => props.handleMovieSaved(m.movieId, m._id))
+    }
   }
 
   const showPreloader = props.loading
-  const showNeedFilter = props.movies !== null && searchFilter.length === 0
+  const showNeedFilter = !onlySavedMovies && props.movies !== null && searchFilter.length === 0
   const showNothingFound = !showNeedFilter && props.movies !== null && data.length === 0
   const showMovies = !showNeedFilter && !showNothingFound && props.movies !== null && data.length > 0
   const showMore = !showNeedFilter && !showNothingFound && moviesLimit < data.length
@@ -64,7 +87,11 @@ function MoviesCardList(props) {
       { showMovies && (
         <div className={ 'movies-cards-list__cards' + (!showMore ? ' movies-cards-list__cards_no-more' : '') }>
           { data.map((card, i) =>
-              <MoviesCard key={ i } card={ card } onlySavedMovies={ onlySavedMovies }/>) }
+            <MoviesCard
+              key={ i }
+              card={ card }
+              handleMovieSave={ handleMovieSave }
+              onlySavedMovies={ onlySavedMovies }/>) }
         </div>
       ) }
       { showMore &&
@@ -72,7 +99,7 @@ function MoviesCardList(props) {
           <button
             className="movies-cards-list__show-more-button"
             type="button"
-            onClick={ onMoreClicked }>Ещё</button>
+            onClick={ handleMoreClicked }>Ещё</button>
         </div> }
     </section>
   )

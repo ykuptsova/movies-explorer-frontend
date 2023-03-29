@@ -6,6 +6,7 @@ import SearchForm from '../SearchForm/SearchForm';
 import MoviesCardList from '../MoviesCardList/MoviesCardList'
 import Footer from '../Footer/Footer'
 
+
 function Movies (props) {
   return (
     <div className="movies">
@@ -17,7 +18,8 @@ function Movies (props) {
         <MoviesCardList
           loading={ props.loading }
           movies={ props.movies }
-          search={ props.search }/>          
+          search={ props.search }
+          handleMovieSaved={ props.handleMovieSaved }/>          
       </PageContent>
       <Footer/>     
     </div>

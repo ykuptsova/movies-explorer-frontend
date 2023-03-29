@@ -73,17 +73,24 @@ function App(props) {
           moviesApi.getMovies(),
         ])
         .then(([savedMovies, movies]) => {
-          const savedMovieIds = new Set(savedMovies.map(m => m.movieId))
-          movies.forEach(m => m.saved = savedMovieIds.has(m.movieId))          
+          const savedMoviesMap = new Map()
+          savedMovies.forEach(m => savedMoviesMap.set(m.movieId, m))
+          movies.forEach(m => {
+            const savedMovie = savedMoviesMap.get(m.movieId)
+            m.saved = savedMovie ? savedMovie._id : null            
+          })          
           setLoading(false)
-          setMovies(movies)
+          setMovies(movies)          
         })
     }
   };
 
+  const handleMovieSaved = (movieId, saved) => {
+    setMovies(movies.map(m => m.movieId === movieId ? { ...m, saved } : m))
+  }
+
   useEffect(() => {   
     if (!user._id) {
-      console.log('!')
       setMovies(null)
       setSearch({ filter: '', short: false })
     }
@@ -102,7 +109,8 @@ function App(props) {
                 loading={ loading }
                 movies={ movies }
                 search={ search }
-                handleSearchUpdate={ handleSearchUpdate }/>
+                handleSearchUpdate={ handleSearchUpdate }
+                handleMovieSaved={ handleMovieSaved }/>
             }/>
           }/>
           <Route exact path="/saved-movies" element={
@@ -111,7 +119,8 @@ function App(props) {
                 loading={ loading }
                 movies={ movies }
                 search={ search }
-                handleSearchUpdate={ handleSearchUpdate }/>
+                handleSearchUpdate={ handleSearchUpdate }
+                handleMovieSaved={ handleMovieSaved }/>
             }/>
           }/>
           <Route exact path="/profile" element={

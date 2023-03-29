@@ -6,7 +6,8 @@ function SavedMovies(props) {
       loading={ props.loading }
       movies={ props.movies }
       search={ props.search } 
-      handleSearchUpdate={ props.handleSearchUpdate }/>
+      handleSearchUpdate={ props.handleSearchUpdate }
+      handleMovieSaved={ props.handleMovieSaved }/>
   )
 }
 
