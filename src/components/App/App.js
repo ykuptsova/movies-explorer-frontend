@@ -14,6 +14,19 @@ import Register from '../Register/Register';
 import NotFound from '../NotFound/NotFound';
 import './App.css';
 
+const readObject = (name, fallback) => {
+  try {
+    return JSON.parse(localStorage.getItem(name)) || fallback
+  } catch {
+    return fallback
+  }
+}
+
+const saveObject = (name, value) => {
+  localStorage.setItem(name, JSON.stringify(value))
+}
+
+
 function App(props) {
   let navigate = useNavigate();
 
@@ -37,26 +50,44 @@ function App(props) {
     navigate('/');
   };
 
-  const [movies, setMovies] = useState(null)
+  const [movies, setMovies] = useState(
+    readObject('movies', null))
   useEffect(() => {
-    setMovies(null)
+    saveObject('movies', movies)
+  }, [movies])
+
+  const [search, setSearch] = useState(
+    readObject('search', { filter: '', short: false }))
+  useEffect(() => {
+    saveObject('search', search)
+  }, [search])
+
+  const [loading, setLoading] = useState(false)
+  const handleSearchUpdate = async (update) => {
+    setSearch({ ...search, ...update })
+    if (movies === null) {
+      setLoading(true)
+      Promise
+        .all([
+          mainApi.getSavedMovies(),
+          moviesApi.getMovies(),
+        ])
+        .then(([savedMovies, movies]) => {
+          const savedMovieIds = new Set(savedMovies.map(m => m.movieId))
+          movies.forEach(m => m.saved = savedMovieIds.has(m.movieId))          
+          setLoading(false)
+          setMovies(movies)
+        })
+    }
+  };
+
+  useEffect(() => {   
+    if (!user._id) {
+      console.log('!')
+      setMovies(null)
+      setSearch({ filter: '', short: false })
+    }
   }, [user]);
-  // useEffect(() => {
-  //   if (!user._id) {
-  //     setMovies([])
-  //     return
-  //   }
-  //   Promise
-  //     .all([
-  //       mainApi.getSavedMovies(),
-  //       moviesApi.getMovies(),
-  //     ])
-  //     .then(([savedMovies, movies]) => {
-  //       const savedMovieIds = new Set(savedMovies.map(m => m.movieId))
-  //       movies.forEach(m => m.saved = savedMovieIds.has(m.movieId))
-  //       setMovies(movies)
-  //     })
-  // }, [user]);
 
   return (
     <div className="app">
@@ -67,17 +98,27 @@ function App(props) {
           }/>
           <Route exact path="/movies" element={
             <LoggedInRoute element={
-              <Movies movies={ movies }/>
+              <Movies
+                loading={ loading }
+                movies={ movies }
+                search={ search }
+                handleSearchUpdate={ handleSearchUpdate }/>
             }/>
           }/>
           <Route exact path="/saved-movies" element={
             <LoggedInRoute element={
-              <SavedMovies movies={ movies }/>
+              <SavedMovies
+                loading={ loading }
+                movies={ movies }
+                search={ search }
+                handleSearchUpdate={ handleSearchUpdate }/>
             }/>
           }/>
           <Route exact path="/profile" element={
             <LoggedInRoute element={
-              <Profile handleSignOut={ handleSignOut } handleProfileUpdate={ handleProfileUpdate }/>
+              <Profile
+                handleSignOut={ handleSignOut }
+                handleProfileUpdate={ handleProfileUpdate }/>
             }/>
           }/>
           <Route exact path="/signin" element={
