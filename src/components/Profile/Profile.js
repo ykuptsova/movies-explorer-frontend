@@ -15,6 +15,8 @@ function Profile (props) {
   const { values, errors, isValid, handleChange }
     = useValidation({ name: user.name, email: user.email });
 
+  const [updated, setUpdated] = useState(false);
+
   const disableSubmit =
     !isValid || serverError || loaing ||
     (values.email === user.email && values.name === user.name)
@@ -34,6 +36,8 @@ function Profile (props) {
         props.handleProfileUpdate(user);
         setEditing(false);
         setLoading(false);
+        setUpdated(true);
+        setTimeout(() => setUpdated(false), 2000)
       })
       .catch(e => {        
         setServerError(e.message);
@@ -96,6 +100,10 @@ function Profile (props) {
                 <div className="profile__error-message">
                   При обновлении профиля произошла ошибка.
                 </div> }
+              { !editing && updated &&
+                <div className="profile__confirmation-message">
+                  Профиль успешно обновлён.
+                </div> }                
               { !editing
                 ? <button
                     type="button"

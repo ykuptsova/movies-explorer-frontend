@@ -169,6 +169,15 @@
   color: #FF004C;
 }
 
+.profile__confirmation-message {
+  font-family: 'Inter', 'Arial', 'Helvetica', sans-serif;
+  font-weight: 400;
+  font-size: 11px;
+  line-height: 1.21;
+  text-align: center;
+  color: #2BE080;
+}
+
 @media (max-width: 768px) {
   .profile__form {
     min-height: 445px;
