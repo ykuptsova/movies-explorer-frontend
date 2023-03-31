@@ -88,7 +88,7 @@ function MoviesCardList(props) {
         <div className={ 'movies-cards-list__cards' + (!showMore ? ' movies-cards-list__cards_no-more' : '') }>
           { data.map((card, i) =>
             <MoviesCard
-              key={ i }
+              key={ card.movieId }
               card={ card }
               handleMovieSave={ handleMovieSave }
               onlySavedMovies={ onlySavedMovies }/>) }

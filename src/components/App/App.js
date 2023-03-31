@@ -16,9 +16,7 @@ import './App.css';
 
 const readObject = (name, fallback) => {
   try {
-    const m =  JSON.parse(localStorage.getItem(name)) || fallback
-    console.log(name, m)
-    return m
+    return JSON.parse(localStorage.getItem(name)) || fallback
   } catch {
     return fallback
   }

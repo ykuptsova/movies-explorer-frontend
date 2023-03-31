@@ -43,11 +43,12 @@ class MoviesApi {
 
   _handleResponse(res) {
     if (res.ok) return res.json()
-    if (res.status === '404')
+    const status = String(res.status)
+    if (status === '404')
       return Promise.reject(new Error(errors.RESOURCE_NOT_FOUND))
-    if (res.status === '500')
+    if (status === '500')
       return Promise.reject(new Error(errors.SERVER_FAILURE))
-    return Promise.reject(new Error(res.status))
+    return Promise.reject(new Error(status))
   }
 }
 

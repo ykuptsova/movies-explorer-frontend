@@ -11,11 +11,12 @@ function Profile (props) {
   const user = useContext(UserContext); 
   const [editing, setEditing] = useState(false);
   const [serverError, setServerError] = useState('');
+  const [loaing, setLoading] = useState(false);
   const { values, errors, isValid, handleChange }
     = useValidation({ name: user.name, email: user.email });
 
   const disableSubmit =
-    !isValid || serverError ||
+    !isValid || serverError || loaing ||
     (values.email === user.email && values.name === user.name)
 
   const onInput = (e) => {
@@ -26,14 +27,18 @@ function Profile (props) {
   const onSubmit = (e) => {
     e.preventDefault();
     const { name, email } = values;
+    setLoading(true)
     mainApi
       .setUserInfo({ name, email })
       .then(user => {
         props.handleProfileUpdate(user);
         setEditing(false);
+        setLoading(false);
       })
-      .catch(e =>
-        setServerError(e.message));
+      .catch(e => {        
+        setServerError(e.message);
+        setLoading(false);
+      });
   }
 
   const onEdit = (e) => {
