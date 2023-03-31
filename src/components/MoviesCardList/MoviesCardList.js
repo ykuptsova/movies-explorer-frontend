@@ -4,11 +4,16 @@ import "./MoviesCardList.css";
 import MoviesCard from '../MoviesCard/MoviesCard';
 import Preloader from '../Preloader/Preloader';
 import mainApi from '../../utils/MainApi';
+import { SHORTFILMS_DURATION, DEVICE_PARAMS } from '../../utils/constants.js';
 
 
 function MoviesCardList(props) {
   const iw = window.innerWidth
-  const [moviesLimit, setMoviesLimit] = useState(iw > 768 ? 12 : iw > 480 ? 8 : 5);
+  const [moviesLimit, setMoviesLimit] = useState(
+    iw > DEVICE_PARAMS.tablet.width ? DEVICE_PARAMS.desktop.total : 
+    iw > DEVICE_PARAMS.mobile.width ? DEVICE_PARAMS.tablet.total : 
+    DEVICE_PARAMS.mobile.total
+  );
   const location = useLocation()
   const onlySavedMovies = location.pathname === '/saved-movies'
 
@@ -37,12 +42,12 @@ function MoviesCardList(props) {
 
   const shortFilms = props.search.short
   if (shortFilms) {
-    data = data.filter(d => d.durationMinutes <= 45)
+    data = data.filter(d => d.durationMinutes <= SHORTFILMS_DURATION)
   }
 
   const handleMoreClicked = () => {
     const iw = window.innerWidth
-    const delta = iw > 768 ? 3 : 2
+    const delta = iw > DEVICE_PARAMS.tablet.width ? 3 : 2 
     setMoviesLimit(moviesLimit + delta)
   }
 
