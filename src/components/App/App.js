@@ -16,7 +16,9 @@ import './App.css';
 
 const readObject = (name, fallback) => {
   try {
-    return JSON.parse(localStorage.getItem(name)) || fallback
+    const m =  JSON.parse(localStorage.getItem(name)) || fallback
+    console.log(name, m)
+    return m
   } catch {
     return fallback
   }
@@ -63,10 +65,13 @@ function App(props) {
   }, [search])
 
   const [loading, setLoading] = useState(false)
-  const handleSearchUpdate = async (update) => {
+  const handleSearchUpdate = (update) => {
     setSearch({ ...search, ...update })
-    if (movies === null) {
-      setLoading(true)
+    fetchMovies()
+  };
+  const fetchMovies = () => {
+    if (movies !== null) return
+    setLoading(true)
       Promise
         .all([
           mainApi.getSavedMovies(),
@@ -82,8 +87,7 @@ function App(props) {
           setLoading(false)
           setMovies(movies)          
         })
-    }
-  };
+  }
 
   const handleMovieSaved = (movieId, saved) => {
     setMovies(movies.map(m => m.movieId === movieId ? { ...m, saved } : m))
@@ -118,9 +122,8 @@ function App(props) {
               <SavedMovies
                 loading={ loading }
                 movies={ movies }
-                search={ search }
-                handleSearchUpdate={ handleSearchUpdate }
-                handleMovieSaved={ handleMovieSaved }/>
+                handleMovieSaved={ handleMovieSaved }
+                fetchMovies={ fetchMovies }/>
             }/>
           }/>
           <Route exact path="/profile" element={
