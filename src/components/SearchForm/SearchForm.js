@@ -6,7 +6,15 @@ import search from "../../images/search-form__button.svg";
 import lens from "../../images/lens-icon.svg";
 
 function SearchForm (props) {
-  const [searchFilter, setSearchFilter] = useState(props.searchFilter);
+  const [filter, setFilter] = useState(props.search.filter);
+
+  const handleFilterClick = () => {
+    props.handleSearchUpdate({ filter })
+  }
+
+  const handleShortFilmsClick = (short) => {
+    props.handleSearchUpdate({ short })
+  }
 
   return (
     <section className="search-form">
@@ -14,27 +22,27 @@ function SearchForm (props) {
         <form className="search-form__input-group" onSubmit={ e => e.preventDefault() }>
           <img className="search-form__lens-image" alt='lens icon' src={ lens }/>
           <input
-            className="search-form__input"
+            className="search-form__input"            
             name="search"
             type="text"
             placeholder="Фильм"
             autoComplete="off"
-            onChange={ e => setSearchFilter(e.target.value) }
-            required
+            value={ filter }
+            onChange={ e => setFilter(e.target.value) }
           />
-          <button className="search-form__button" onClick={ () => props.setSearchFilter(searchFilter) }>
+          <button className="search-form__button" onClick={ handleFilterClick }>
             <img className="search-form__button-image" alt='search movie' src={ search }/>
           </button>
         </form>
         <FilterCheckbox
           className="search-form__filter-checkbox-wide"
-          shortFilms={ props.shortFilms }
-          setShortFilms={ props.setShortFilms }/>
+          shortFilms={ props.search.short }
+          setShortFilms={ handleShortFilmsClick }/>
       </div>
       <FilterCheckbox
-          className="search-form__filter-checkbox-narrow"
-          shortFilms={ props.shortFilms }
-          setShortFilms={ props.setShortFilms }/>
+        className="search-form__filter-checkbox-narrow"
+        shortFilms={ props.search.short }
+        setShortFilms={ handleShortFilmsClick }/>
       <div className="search-form__divider"/>
     </section>
   )

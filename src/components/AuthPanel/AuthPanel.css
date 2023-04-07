@@ -1,3 +1,7 @@
+.auth-panel {
+  width: 100%;
+}
+
 .auth-panel__button {
   margin-top: auto;
   border-style: none;
@@ -13,6 +17,13 @@
   cursor: pointer;
   width: 100%;
   padding: 14px 0;
+}
+
+.auth-panel__button_disabled {
+  background-color: #F8F8F8;
+  pointer-events: none;
+  cursor: default;
+  color: #C2C2C2;
 }
 
 .auth-panel__button:hover {

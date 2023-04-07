@@ -7,12 +7,14 @@ specifiers:
   react-dom: ^18.2.0
   react-router-dom: 6.3.0
   react-scripts: 5.0.1
+  validator: ^13.9.0
 
 dependencies:
   react: 18.2.0
   react-dom: 18.2.0_react@18.2.0
   react-router-dom: 6.3.0_biqbaboplfbrettd7655fr4n2y
   react-scripts: 5.0.1_react@18.2.0
+  validator: 13.9.0
 
 devDependencies:
   eslint: 8.33.0
@@ -9277,6 +9279,11 @@ packages:
       '@types/istanbul-lib-coverage': 2.0.4
       convert-source-map: 1.9.0
       source-map: 0.7.4
+    dev: false
+
+  /validator/13.9.0:
+    resolution: {integrity: sha512-B+dGG8U3fdtM0/aNK4/X8CXq/EcxU2WPrPEkJGslb47qyHsxmbggTWK0yEA4qnYVNF+nxNlN88o14hIcPmSIEA==}
+    engines: {node: '>= 0.10'}
     dev: false
 
   /vary/1.1.2:

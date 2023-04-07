@@ -96,7 +96,7 @@
   }
 }
 
-@media (max-width: 450px) {
+@media (max-width: 480px) {
   .search-form {
     padding: 80px 10px 10px;
   }

@@ -71,12 +71,26 @@
 }
 
 .profile__input:focus {
-  border-radius: 9px;
-  outline: 2px solid #2BE080;
+  border-bottom: 1px solid #2BE080;
 }
 
 .profile__input_no-border {
-  border-bottom: transparent;
+  border-bottom: 1px solid transparent;
+}
+
+.profile__input_error {
+  color: #EE3465;
+}
+
+.profile__input_error:focus {
+  border-bottom: 1px solid #EE3465;
+}
+
+.profile__error {
+  margin-top: 6px;
+  color: #EE3465;
+  font-size: 10px;
+  min-height: 12px;
 }
 
 .profile__buttons-container {
@@ -122,6 +136,8 @@
 
 .profile__button-save_disabled {
   background-color: #F8F8F8;
+  pointer-events: none;
+  cursor: default;
   color: #C2C2C2;
 }
 
@@ -151,6 +167,15 @@
   line-height: 1.21;
   text-align: center;
   color: #FF004C;
+}
+
+.profile__confirmation-message {
+  font-family: 'Inter', 'Arial', 'Helvetica', sans-serif;
+  font-weight: 400;
+  font-size: 11px;
+  line-height: 1.21;
+  text-align: center;
+  color: #2BE080;
 }
 
 @media (max-width: 768px) {
